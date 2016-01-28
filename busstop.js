@@ -1,13 +1,14 @@
 var PredictionCard = React.createClass({
     render: function() {
         var minutes = this.props.prediction.attr('minutes');
+        var seconds = this.props.prediction.attr('seconds');
         var epochTime = parseInt(this.props.prediction.attr('epochTime'));
         var affectedByLayover = this.props.prediction.attr('affectedByLayover') === 'true';
 
         var arrivalTime = (new Date(epochTime)).toLocaleTimeString();
 
         return <li className="collection-item">
-            <p>{arrivalTime} ({minutes} min) {affectedByLayover ? '*' : ''}</p>
+            <p title={seconds + " seconds"}>{arrivalTime} ({minutes} min) {affectedByLayover ? '*' : ''}</p>
         </li>;
     }
 });
