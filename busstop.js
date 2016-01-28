@@ -51,6 +51,7 @@ var BusStop = React.createClass({
                 this.parsePredictions(data)
             }.bind(this)
         });
+        setInterval(this.getPredictions, 30000);
     },
 
     getInitialState: function() {
