@@ -1,3 +1,9 @@
+var LastUpdatedCard = React.createClass({
+    render: function() {
+        return <span>Last updated {this.props.lastUpdated}</span>
+    }
+});
+
 var PredictionCard = React.createClass({
     render: function() {
         var minutes = this.props.prediction.attr('minutes');
@@ -42,7 +48,7 @@ var BusStop = React.createClass({
             predictions.push(ps);
         });
 
-        this.setState({'predictions': predictions});
+        this.setState({'predictions': predictions, lastUpdated: new Date()});
     },
 
     getPredictions: function() {
@@ -56,7 +62,7 @@ var BusStop = React.createClass({
     },
 
     getInitialState: function() {
-        return {'predictions': []};
+        return {predictions: [], lastUpdated: null};
     },
 
     componentWillMount: function() {
@@ -96,8 +102,15 @@ var BusStop = React.createClass({
                 </div>
             }());
         }
+        if (this.state.lastUpdated) {
+            var lastUpdated = this.state.lastUpdated.toLocaleTimeString();
+        }
+        else {
+            var lastUpdated = '';
+        }
 
         return <div>
+            <LastUpdatedCard lastUpdated={lastUpdated} />
             {content}
         </div>;
     }
