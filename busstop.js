@@ -21,7 +21,9 @@ var PredictionsContainer = React.createClass({
 
         var predictionList = this.props.predictions.find('prediction');
 
-        return <ul className="collections with-header">
+        var hideElement = favoriteRoutes.indexOf(routeTag) === -1;
+
+        return <ul className={hideElement ? "collections with-header hide" : "collections with-header"}>
             <li className="collection-header blue lighten-5">
                <h5>Route {routeTag} - {stopTitle} - {direction}</h5>
             </li>
@@ -37,7 +39,7 @@ var BusStop = React.createClass({
         var predictions = [];
         var xmlPredictions = $(data).find('predictions');
         xmlPredictions.each(function(i, ps) {
-            predictions.push(ps); 
+            predictions.push(ps);
         });
 
         this.setState({'predictions': predictions});
