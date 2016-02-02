@@ -9,12 +9,17 @@ var PredictionCard = React.createClass({
         var minutes = this.props.prediction.attr('minutes');
         var seconds = this.props.prediction.attr('seconds');
         var epochTime = parseInt(this.props.prediction.attr('epochTime'));
-        var affectedByLayover = this.props.prediction.attr('affectedByLayover') === 'true';
+
+        //var affectedByLayover = this.props.prediction.attr('affectedByLayover') === 'true';
+        var affectedByLayover = null;
+        if (this.props.prediction.attr('affectedByLayover') === 'true') {
+            affectedByLayover = <i className="tiny material-icons">schedule</i>;
+        }
 
         var arrivalTime = (new Date(epochTime)).toLocaleTimeString();
 
         return <li className="collection-item">
-            <p title={seconds + " seconds"}>{arrivalTime} ({minutes} min) {affectedByLayover ? '*' : ''}</p>
+            <p title={seconds + " seconds"}>{arrivalTime} ({minutes} min) {affectedByLayover}</p>
         </li>;
     }
 });
